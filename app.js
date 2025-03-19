@@ -41,10 +41,14 @@ const createCard = (title, body, img, parent) => {
     newCard.addEventListener('click', () => {
         anime({
             targets: newCard,
+            before: ()=> {
+                newCard.classList.add('animating..')
+            },
             scale: [1, 1.2],
             duration: 100,
             easing: 'easeInOutSine',
             complete: () => {
+                newCard.classList.remove('animating..')
                 anime({
                     targets: newCard,
                     scale: [1.2, 1],  // Return to original size
@@ -141,7 +145,7 @@ window.onbeforeunload = function (e) {
     }
 };
 
-// BOM Event: On Load (Trigger animations once the page loads)
+// BOM load animations once the page loads)
 window.onload = function () {
     // Animating page content and elements after loading
     anime({
