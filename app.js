@@ -9,6 +9,8 @@ const textareas = document.querySelectorAll('textarea')
 const modalElement = document.getElementById('modal'); 
 const modal = new bootstrap.Modal(modalElement);
 const userFavs = document.getElementById('user-favs')
+const notifyUser = document.getElementById('notify-user')
+
 
 const createCard = (title, body, img, parent) => {
     let col = document.createElement('div')
@@ -20,6 +22,7 @@ const createCard = (title, body, img, parent) => {
     col.classList.add('col-md-3')
     newCard.classList.add('card')
     newCard.classList.add('hover')
+    newCard.classList.add('shadow-lg')
     cardTitle.classList.add('card-header')
     cardBody.classList.add('card-body')
 
@@ -82,19 +85,97 @@ form.addEventListener('submit', (e)=> {
     
     
     alert('Your dog was successfully added')
+    alertUser('success', 'Your dog was successfully added!')
     modal.hide()
-    
+
     inputs[0].value = ''; // Clear title input
     inputs[1].value = ''; // Clear dog image input
     textareas[0].value = ''; // Clear description textarea
 
+    userFavs.classList.remove('hidden')
     // add new dog to front end
     createCard(newDog.breed, newDog.description, newDog.img, userFavs)
 
 })
 
 
+const alertUser = (type, msg) => {
+    let newAlert = document.createElement('div')
+    let closeBtn = document.createElement('button')
+    newAlert.classList.add('alert')
+    newAlert.classList.add('fade')
+    newAlert.classList.add('show')
+    newAlert.classList.add('alert-dismissable')
+    newAlert.classList.add(`alert-${type}`)
+
+    // having trouble getting the close btn all the way to the end of the alert div while doing this programatically through JS
+    closeBtn.setAttribute('data-bs-dismiss', 'alert' )
+    closeBtn.setAttribute('aria-label', "Close" )
+    closeBtn.setAttribute('role', 'alert' )
+    closeBtn.classList.add('btn-close' )
+
+    newAlert.setAttribute('role', 'alert')
+    newAlert.innerHTML = msg
+    newAlert.appendChild(closeBtn)
+    
+    notifyUser.appendChild(newAlert)
+}
 
 
 
+const toggleTheme = (e) => {
+    if(e.target.checked) {
+        document.querySelector('html').setAttribute('data-bs-theme', 'dark')
+        e.target.nextElementSibling.children[0].innerHTML = 'Dark'
+    } else {
+        document.querySelector('html').setAttribute('data-bs-theme', 'light')
+        e.target.nextElementSibling.children[0].innerHTML = 'Light'
+
+    }
+}
+
+// add some cool animation effects
+anime({
+    targets: 'h1',
+    translateX: [50, 0],
+    opacity: [0, 1],
+})
+anime({
+    targets: 'h3',
+    translateX: [50, 0],
+    opacity: [0, 1],
+    delay: 1500
+})
+anime({
+    targets: 'h6',
+    translateX: [50, 0],
+    opacity: [0, 1],
+    delay: 1900
+})
+anime({
+    targets: 'button',
+    translateY: [150, 0],
+    opacity: [0, 1],
+    delay: 2500
+})
+anime({
+    targets: 'h5',
+    translateX: [50, 0],
+    delay: 200,
+    opacity: [0, 1],
+})
+anime({
+    targets: '#content',
+    translateX: [50, 0],
+    delay: 500,
+    opacity: [0, 1],
+})
+anime({
+    targets: '.card',
+    translateY: [100, 0],
+    opacity: [0, 1],
+    duration: 600,
+    easing: 'easeInOutQuart',
+    delay: (el, i) => i * 300 
+});
 

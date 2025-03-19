@@ -19,3 +19,7 @@
 .hover:hover img {
     opacity: 1
 }
+
+.hidden {
+    display: none
+}
