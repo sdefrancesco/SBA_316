@@ -19,8 +19,8 @@
 
             </div>
         </div>
-        <section class="mb-5 mt-5">
-            <h1>Whats your favorite dog?</h1>
+        <section class="mb-3 mt-5">
+            <h3>Whats your favorite dog?</h3>
             <h5>Create your own list of dogs!</h5>
         </section>
 
@@ -28,33 +28,42 @@
             Add A Dog
           </button>
 
+          <form action="" class="form" id="form">
         <div class="modal fade" id="modal" tabindex="-1" centered>
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Add A Dog To Your List</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="" class="form" id="form">
                       <div class="mb-3">
                           <label for="">Breed</label>
                           <input type="text" class="form-control" placeholder="Dog Breed"/>
                       </div>
                       <div class="mb-3">
+                          <label for="">Image</label>
+                          <input type="text" class="form-control" placeholder="Dog Image"/>
+                          <small>Get an image already hosted on the internet and paste string</small>
+                      </div>
+                      <div class="mb-3">
                           <label for="">Why do you like them?</label>
                           <textarea rows='4' type="text" class="form-control" placeholder="Your favorite qualities?"></textarea>
                       </div>
-                  </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Add New Dog"/>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Add Dog</button>
-                </div>
-              </div>
             </div>
-          </div>
-        
+        </div>
+    </form>
+    <div id="user-favs" class="mt-5">
+        <div class="row">
+
+        </div>
+    </div>
 
     </div>
 

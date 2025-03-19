@@ -3,7 +3,14 @@
 // Add Your Favorite Dog to a seperate list!
 const content = document.getElementById('content')
 
-const createCard = (title, body, img) => {
+const form = document.querySelector('form')
+const inputs = document.querySelectorAll('input')
+const textareas = document.querySelectorAll('textarea')
+const modalElement = document.getElementById('modal'); 
+const modal = new bootstrap.Modal(modalElement);
+const userFavs = document.getElementById('user-favs')
+
+const createCard = (title, body, img, parent) => {
     let col = document.createElement('div')
     let newCard = document.createElement('div')
     let cardTitle = document.createElement('div')
@@ -12,6 +19,7 @@ const createCard = (title, body, img) => {
 
     col.classList.add('col-md-3')
     newCard.classList.add('card')
+    newCard.classList.add('hover')
     cardTitle.classList.add('card-header')
     cardBody.classList.add('card-body')
 
@@ -27,7 +35,7 @@ const createCard = (title, body, img) => {
     newCard.appendChild(cardBody)
     col.appendChild(newCard)
 
-    content.children[0].appendChild(col)
+    parent.children[0].appendChild(col)
 }
 
 const dogs = [
@@ -39,5 +47,54 @@ const dogs = [
 
 dogs.forEach((dog) => {
     console.log(dog)
-    createCard(dog.breed, dog.description, dog.img)
+    createCard(dog.breed, dog.description, dog.img, content)
 })
+
+
+
+// commented this out because the newly added dog would not have the class of hover so i moved it into the createCard function
+
+// let cards = document.getElementsByClassName('card')
+// for(let i = 0; i < cards.length; i++) { 
+//     cards[i].classList.add('hover')
+// }
+
+let userDogs = []
+
+form.addEventListener('submit', (e)=> {
+    e.preventDefault()
+
+    let title = inputs[0].value
+    let dogImg = inputs[1].value
+    let description = textareas[0].value
+
+    if(title == '' || description == '' || dogImg == '') {
+        console.log('Inputs cannot be blank')
+        alert('Inputs cannot be blank!')
+        return false
+    }
+    let newDog = {
+        breed: title,
+        description: description,
+        img: dogImg
+    }
+    userDogs.push(newDog)
+    
+    
+    alert('Your dog was successfully added')
+    modal.hide()
+    
+    inputs[0].value = ''; // Clear title input
+    inputs[1].value = ''; // Clear dog image input
+    textareas[0].value = ''; // Clear description textarea
+
+    // add new dog to front end
+    createCard(newDog.breed, newDog.description, newDog.img, userFavs)
+
+})
+
+
+
+
+
+
